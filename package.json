@@ -1,0 +1,17 @@
+{
+  "name": "express-drills",
+  "version": "1.0.0",
+  "description": "chapter3 drills",
+  "main": "drills.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node.drills.js",
+    "dev": "nodemon drills"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
