@@ -31,14 +31,13 @@ drills.get('/cipher', (req, res) => {
     } 
     
     const shiftNum = req.query.num;
-    if(!shiftNum){
+    if(!shiftNum || typeof shiftNum !== 'number'){
         return res.status(400).send('Please provide number to run the cipher');
     } else {
         parseInt(shiftNum);
     }
    
     console.log(text, shiftNum);
-    
     
     let codedText = (text) => {
         return text.split('').map(letter => {
@@ -57,30 +56,31 @@ drills.get('/cipher', (req, res) => {
 })
 
 drills.get('/lotto', (req, res) => {
-   const numbers = req.query.num;
-   console.log(numbers)
-   const randomNumbers = [];
-   let i = 0;
-   while(i < 7) {
+    const numbers = req.query.num;
+    console.log(numbers)
+    const randomNumbers = [];
+
+    let i = 0;
+    while(i < 7) {
        let num = Math.floor(Math.random() * Math.floor(20));
        console.log('here', i, num)
        randomNumbers.push(num);
        i++;
    }
-   console.log(randomNumbers)
+    console.log(randomNumbers)
 
-   let winningNumbers = randomNumbers.filter(num => {
+    let winningNumbers = randomNumbers.filter(num => {
        return numbers.find(value => value == num)
-   })
-   console.log(winningNumbers, winningNumbers.length)
+    })
+    console.log(winningNumbers, winningNumbers.length)
 
-   if(winningNumbers.length === 6) {
+    if(winningNumbers.length === 6) {
        res.send('Congratulations! You win $100!') ;
-   } else if(winningNumbers.length ===5) {
+    } else if(winningNumbers.length ===5) {
        res.send('Congratulations, you win a free ticket');
-   } else {
+    } else {
        res.send('Sorry, you lose')
-   }
+    }
    
    
 })
