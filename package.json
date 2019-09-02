@@ -5,13 +5,14 @@
   "main": "drills.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node.drills.js",
+    "start": "node drills.js",
     "dev": "nodemon drills"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "morgan": "^1.9.1"
   }
 }

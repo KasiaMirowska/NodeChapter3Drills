@@ -1,22 +1,44 @@
 const express = require('express');
+const morgan = require('morgan');
 const drills = express();
 
 drills.listen(7000, () => {
     console.log('Express server is listening on port 7000!');
   });
 
+drills.use(morgan('dev'));
+
 drills.get('/sum', (req, res) => {
     const a = parseInt(req.query.a);
     const b = parseInt(req.query.b);
     console.log(typeof a, typeof b, a,b, );
     let c = a + b;
+
+    if(!a || !b) {
+        return res.status(400).send('Please provide two numbers')
+    };
+    
     res.send(`The sum of ${a} and ${b} is ${c}`);
+    
 })
 
 drills.get('/cipher', (req, res) => {
-    const text = req.query.text.replace(/\s+/g, '');
-    const shiftNum = parseInt(req.query.num);
+    const text = req.query.text;
+    if(!text){
+        return res.status(400).send('Please provide text to cipher');
+    } else {
+        text.replace(/\s+/g, '');
+    } 
+    
+    const shiftNum = req.query.num;
+    if(!shiftNum){
+        return res.status(400).send('Please provide number to run the cipher');
+    } else {
+        parseInt(shiftNum);
+    }
+   
     console.log(text, shiftNum);
+    
     
     let codedText = (text) => {
         return text.split('').map(letter => {
@@ -29,7 +51,7 @@ drills.get('/cipher', (req, res) => {
     }
     console.log(codedText(text));
     let cipheredText = codedText(text).join('');
-    
+   
     res.send(`Your ciphered message is : ${cipheredText}! `)
 
 })
